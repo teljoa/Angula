@@ -1,0 +1,16 @@
+<input type="text" [(ngModel)]="descripcion">
+<button (click)="addTask(descripcion)" [disabled]="!descripcion">Registrar Tarea</button>
+@for (task of tasks; track task.id) {
+    <div>
+        <input type="checkbox" [(ngModel)]="task.completada">
+        <span [class.completed]="task.completada">{{ task.descripcion }}</span>
+        @if(task.urgente){
+            <span>⚠️</span>
+        }
+        <button (click)="eliminar(task.id)">🗑️</button>
+    </div>
+}@empty {
+    <div>
+        <span>*"🟢 Sistemas al 100%: No hay reparaciones pendientes."*</span>
+    </div>
+}
