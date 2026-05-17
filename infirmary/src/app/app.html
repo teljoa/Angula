@@ -1,0 +1,13 @@
+<div class="enfermeria-container"> 
+    <h1>🏥 Z-0: MONITOR DE BIO-SEÑALES</h1>
+
+    <div class="grid-pacientes"> 
+        @for (paciente of pacientes; track paciente.id) { 
+            <app-paciente-card 
+            [pacienteInfo]=paciente
+            (curarClick)="administrarCura(paciente)"
+            (bajaClick)="darDeBaja(paciente.id)">
+            </app-paciente-card>
+        }
+    </div> 
+</div>

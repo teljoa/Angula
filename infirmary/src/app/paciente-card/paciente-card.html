@@ -1,0 +1,19 @@
+<div class="tarjeta-paciente" [class.peligro]="pacienteInfo.infeccion > 70"> 
+    <div class="datos">
+        <h3>{{ pacienteInfo.nombre }}</h3> 
+        <p>Estado: <strong>{{pacienteInfo.estado | uppercase }}</strong></p> 
+        <div class="barra-contenedor"> 
+            <div class="barra-progreso" 
+                    [style.width.%]="pacienteInfo.infeccion" 
+                    [style.backgroundColor]="pacienteInfo.infeccion > 50 ? 'red' : 'lime'"> 
+            </div>
+        </div> 
+            <p class="nivel">Nivel Infección: {{ pacienteInfo.infeccion }}% </p> 
+    </div> 
+    <div class="acciones"> 
+        <button (click)="curarClick.emit(pacienteInfo)" 
+                [disabled]="pacienteInfo.estado ==='transformado'"> 💉 SUERO </button>
+        <button class="btn-eliminar" 
+                (click)="bajaClick.emit(pacienteInfo.id)"> ☠️ BAJA </button> 
+    </div> 
+</div>
