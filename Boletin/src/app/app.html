@@ -1,0 +1,31 @@
+<nav>
+    <a routerLink="/tasks" routerLinkActive="active">Tareas</a>
+    <a routerLink="/add-task" routerLinkActive="active">Añadir</a>
+</nav>
+<router-outlet></router-outlet>
+<input [(ngModel)]="title" placeholder="Nueva Tarea">
+
+<button
+    (click)="AddTask()"
+    [disabled]="!title.trim()">
+    Añadir tarea
+</button>
+
+@if(!title.trim()){
+    <p style="color: red;">El titulo no puede estar vacio</p>
+}
+
+@for (task of tasks; track task.id) {
+    <app-task
+        [task]="task"
+        (deleteTask)="removeTask($event)"
+        (toggle)="toggleTask(task)">
+
+    </app-task>
+    <button [routerLink]="['/task', task.id]">
+        Ver detalles
+    </button>
+}
+@empty {
+    <p>No hay tareas pendientes</p>
+}

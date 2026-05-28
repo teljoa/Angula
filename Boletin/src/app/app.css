@@ -1,0 +1,29 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+input {
+  padding: 5px;
+  margin-right: 10px;
+}
+
+button {
+  margin: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+li {
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+nav a {
+  margin-right: 10px;
+}
+
+.active {
+  font-weight: bold;
+  color: blue;
+}
