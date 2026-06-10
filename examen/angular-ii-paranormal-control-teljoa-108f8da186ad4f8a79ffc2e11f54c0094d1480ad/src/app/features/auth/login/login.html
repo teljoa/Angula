@@ -1,0 +1,45 @@
+<div class="min-h-screen flex items-center justify-center p-4 relative">
+  
+  <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 pointer-events-none"></div>
+
+  <div class="panel w-full max-w-sm z-10 border-terminal/30 shadow-[0_0_50px_rgba(0,255,65,0.05)]">
+    
+    <div class="mb-8 text-center">
+      <div class="inline-flex items-center justify-center w-16 h-16 border-2 border-terminal rotate-45 mb-4">
+        <span class="text-3xl -rotate-45">👁️</span>
+      </div>
+      <h1 class="text-3xl text-terminal font-bold tracking-tighter">BUREAU</h1>
+      <p class="text-[0.6rem] uppercase tracking-[0.4em] text-gray-500">Authorized Personnel Only</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-5">
+      
+      <div>
+        <label class="input-label">Identificador</label>
+        <input type="email" formControlName="email" class="input-field" placeholder="usuario@bureau.com" autocomplete="off">
+      </div>
+
+      <div>
+        <label class="input-label">Clave</label>
+        <input type="password" formControlName="password" class="input-field" placeholder="••••••••">
+      </div>
+
+      @if (errorMsg) {
+        <div class="bg-danger/10 border border-danger text-danger text-xs p-2 font-mono text-center animate-pulse">
+          ⚠️ {{ errorMsg }}
+        </div>
+      }
+
+      <button type="submit" [disabled]="form.invalid" class="btn btn-primary w-full mt-4">
+        INICIAR SESIÓN
+      </button>
+
+      <div class="text-center pt-2">
+        <a routerLink="/auth/register" class="text-xs text-gray-600 hover:text-terminal font-mono cursor-pointer transition-colors">
+          [ SOLICITAR ACCESO ]
+        </a>
+      </div>
+
+    </form>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<div class="min-h-screen p-6 animate-[fadeIn_0.5s_ease-out]">
+
+    <div class="p-6 pt-24 max-w-7xl mx-auto space-y-6 animate-[fadeIn_0.5s_ease-out]">
+
+        <div class="flex justify-between items-center border-b border-border pb-4">
+            <div>
+                <h2 class="text-2xl text-white">INVENTARIO DE EQUIPAMIENTO</h2>
+                <p class="text-xs text-gray-400 font-mono">Suministros y Armamento - Nivel 3</p>
+            </div>
+
+            <button routerLink="/equipment/add" class="btn btn-primary text-sm">
+                + NUEVO SUMINISTRO
+            </button>
+        </div>
+
+        <div class="overflow-x-auto bg-surface rounded border border-gray-800 shadow-xl">
+            <table class="w-full text-left text-sm text-gray-400">
+                <thead class="bg-black/30 text-xs uppercase font-mono text-gray-500">
+                    <tr>
+                        <th class="px-6 py-4">Nombre</th>
+                        <th class="px-6 py-4">Categoría</th>
+                        <th class="px-6 py-4">Estado</th>
+                        <th class="px-6 py-4">Custodia (Agente)</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-800 font-mono">
+                    @for (item of list(); track item._id) {
+                    <tr class="hover:bg-white/5 transition-colors duration-200">
+                        <td class="px-6 py-4 font-bold text-gray-200">{{ item.name }}</td>
+                        <td class="px-6 py-4">{{ item.type }}</td>
+                        <td class="px-6 py-4">
+                            @switch (item.condition) {
+                            @case ('New') { <span class="badge-new">Nuevo</span> }
+                            @case ('Used') { <span class="badge-used">Usado</span> }
+                            @case ('Damaged') { <span class="badge-damaged">Dañado</span> }
+                            }
+                        </td>
+
+                        <td class="px-6 py-4">
+                            @if (item.assignedTo && isAgent(item.assignedTo)) {
+                            <div class="flex flex-col">
+                                <span class="text-blue-400 font-bold text-xs tracking-wide">
+                                    👤 {{ item.assignedTo.codeName }}
+                                </span>
+                                <span class="text-[10px] text-gray-600">
+                                    {{ item.assignedTo.department }}
+                                </span>
+                            </div>
+                            } @else {
+                            <span class="text-gray-600 italic text-xs">// ALMACÉN CENTRAL</span>
+                            }
+                        </td>
+
+                    </tr>
+                    } @empty {
+                    <tr>
+                        <td colspan="4" class="p-6 text-center text-gray-600">Sin datos.</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>

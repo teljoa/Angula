@@ -1,0 +1,75 @@
+<div class="p-6 pt-24 max-w-7xl mx-auto space-y-6 animate-[fadeIn_0.5s_ease-out]">
+
+  <div class="flex justify-between items-center border-b border-border pb-4">
+    <div>
+      <h2 class="text-2xl text-white">EXPEDIENTES ACTIVOS</h2>
+      <p class="text-xs text-gray-400 font-mono">Base de datos centralizada de objetos anómalos</p>
+    </div>
+
+    <button routerLink="/anomalies/create" class="btn btn-primary text-sm">
+      + NUEVO REGISTRO
+    </button>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    @for (anomaly of anomalies(); track anomaly._id) {
+    <div class="panel group flex flex-col h-full hover:border-terminal/50 transition-colors">
+
+      <div class="flex justify-between items-start mb-4">
+        <span class="font-mono text-xl font-bold text-white group-hover:text-terminal transition-colors">
+          {{ anomaly.subject }}
+        </span>
+
+        @switch (anomaly.dangerLevel) {
+        @case ('Safe') { <span class="badge badge-safe">SAFE</span> }
+        @case ('Euclid') { <span class="badge badge-euclid">EUCLID</span> }
+        @case ('Keter') { <span class="badge badge-keter">KETER</span> }
+        }
+      </div>
+
+      <div class="flex-grow">
+        <p class="text-sm text-gray-400 font-sans leading-relaxed mb-4">
+          {{ anomaly.description }}
+        </p>
+
+        <div class="grid grid-cols-2 gap-2 text-xs font-mono text-gray-500 border-t border-border pt-4">
+          <div>
+            <span class="block uppercase tracking-wider text-[0.6rem] mb-1">Estado</span>
+            <span [class.text-danger]="anomaly.status === 'Breached'"
+              [class.text-terminal]="anomaly.status === 'Contained'">
+              {{ anomaly.status }}
+            </span>
+          </div>
+          <div>
+            <span class="block uppercase tracking-wider text-[0.6rem] mb-1">Registrado Por</span>
+            <span class="text-white">{{ anomaly.registeredBy }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="mt-6 flex justify-end gap-2 border-t border-border pt-4 opacity-50 group-hover:opacity-100 transition-opacity">
+
+        <a [routerLink]="['/anomalies/edit', anomaly._id]" class="btn btn-ghost text-xs px-2 py-1 cursor-pointer">
+          EDITAR
+        </a>
+
+        @if (authService.currentUser()?.clearanceLevel === 5) {
+        <button (click)="deleteAnomaly(anomaly._id)" class="btn btn-danger text-xs px-2 py-1">
+          ELIMINAR
+        </button>
+        }
+      </div>
+
+    </div>
+    } @empty {
+    <div class="col-span-full py-20 text-center">
+      <div class="text-6xl mb-4">🗂️</div>
+      <h3 class="text-xl text-white font-mono">SIN REGISTROS</h3>
+      <p class="text-gray-500">La realidad es estable. Por ahora.</p>
+    </div>
+    }
+
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="p-6 pt-24 max-w-7xl mx-auto space-y-8 animate-[fadeIn_0.5s_ease-out]">
+  
+  <header class="flex flex-col md:flex-row justify-between items-end border-b border-border pb-4">
+    <div>
+      <h1 class="text-4xl text-white mb-2">PUESTO DE MANDO</h1>
+      <p class="text-sm text-gray-400 font-mono uppercase tracking-widest">
+        Bienvenido, {{ authService.currentUser()?.codeName }}
+      </p>
+    </div>
+    <div class="text-right">
+      <span class="text-xs text-terminal animate-pulse">● SISTEMAS ONLINE</span>
+      <div class="text-[0.6rem] text-gray-500 font-mono">{{ authService.currentUser()?.department }}</div>
+    </div>
+  </header>
+
+  <section>
+    <h3 class="text-lg text-terminal mb-4 flex items-center gap-2">
+      <span class="w-2 h-2 bg-terminal"></span>
+      RED DE VIGILANCIA GLOBAL
+    </h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      
+      @for (loc of locations(); track loc._id) {
+        <div class="panel hover:bg-surface-hl transition-colors group cursor-crosshair">
+          <div class="absolute top-0 right-0 p-2 opacity-50 group-hover:opacity-100 transition-opacity">
+            <span class="text-[0.6rem] text-gray-500 border border-gray-600 px-1">SEC-{{ $index + 1 }}</span>
+          </div>
+
+          <h4 class="text-xl text-white mb-1">{{ loc.name }}</h4>
+          <p class="text-xs text-gray-400 font-mono mb-4">{{ loc.coordinates }}</p>
+
+          <div class="flex items-center justify-between mt-4">
+            <span class="text-[0.6rem] uppercase tracking-wider text-gray-500">Nivel de Amenaza</span>
+            
+            @if (loc.riskLevel === 'High') {
+              <span class="badge badge-keter">CRÍTICO</span>
+            } @else if (loc.riskLevel === 'Medium') {
+              <span class="badge badge-euclid">ELEVADO</span>
+            } @else {
+              <span class="badge badge-safe">ESTABLE</span>
+            }
+          </div>
+        </div>
+      } @empty {
+        <div class="col-span-3 p-12 border border-dashed border-gray-700 text-center text-gray-500 font-mono">
+          // NO HAY DATOS DE TELEMETRÍA DISPONIBLES //
+        </div>
+      }
+
+    </div>
+  </section>
+
+</div>

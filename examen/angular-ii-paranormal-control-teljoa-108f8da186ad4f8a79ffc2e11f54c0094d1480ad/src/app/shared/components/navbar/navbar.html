@@ -1,0 +1,36 @@
+<nav class="w-full bg-surface border-b border-border h-16 flex items-center px-6 justify-between fixed top-0 z-50">
+  
+  <div class="flex items-center gap-3">
+    <div class="w-8 h-8 bg-terminal/20 border border-terminal flex items-center justify-center animate-pulse">
+      <span class="text-terminal font-mono font-bold">👁️</span>
+    </div>
+    <div class="flex flex-col">
+      <span class="font-mono font-bold text-lg tracking-tighter text-white">BUREAU</span>
+      <span class="text-[0.6rem] text-terminal uppercase tracking-[0.3em] leading-none">Control Paranormal</span>
+    </div>
+  </div>
+
+   <!-- Links de navegación para usuarios autenticados -->
+   <!-- TODO: Mostrar solo si el usuario está autenticado -->
+  @if(isLogged){
+    <div class="flex items-center gap-6">
+      <a routerLink="/dashboard" routerLinkActive="text-terminal border-b-2 border-terminal" class="text-sm font-mono text-gray-400 hover:text-white py-5 transition-colors cursor-pointer">
+        DASHBOARD
+      </a>
+      <a routerLink="/anomalies" routerLinkActive="text-terminal border-b-2 border-terminal" class="text-sm font-mono text-gray-400 hover:text-white py-5 transition-colors cursor-pointer">
+        EXPEDIENTES
+      </a>
+      <a routerLink="/equipment" routerLinkActive="text-terminal border-b-2 border-terminal" class="text-sm font-mono text-gray-400 hover:text-white py-5 transition-colors cursor-pointer">
+        EQUIPAMIENTO
+      </a>
+      <div class="hidden md:flex flex-col items-end border-l border-border pl-6">
+        <!-- TODO: Mostrar el nombre y nivel del usuario autenticado -->
+        <span class="text-xs text-white font-mono">{{user()?.codeName}}</span>
+        <span class="text-[0.6rem] text-terminal uppercase">{{user()?.clearanceLevel}}</span>
+      </div>
+      <button (click)="logout()" class="btn btn-ghost text-xs border border-border/50 hover:border-danger hover:text-danger">
+        SALIR
+      </button>
+    </div>
+  }
+</nav>

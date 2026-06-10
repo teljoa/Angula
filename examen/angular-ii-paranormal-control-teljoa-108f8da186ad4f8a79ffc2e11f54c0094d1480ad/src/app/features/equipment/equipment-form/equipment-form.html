@@ -1,0 +1,65 @@
+<div class="min-h-screen flex items-center justify-center p-6 animate-[fadeIn_0.5s_ease-out]">
+  <div class="panel w-full max-w-lg border-t-4 border-terminal">
+    
+    <h2 class="text-2xl font-mono text-white mb-6">REGISTRO DE EQUIPAMIENTO</h2>
+
+    <form class="space-y-6">
+
+      <div>
+        <label class="input-label">Nombre del Equipo</label>
+        <input 
+          type="text" 
+          required 
+          class="input-field" 
+          placeholder="Ej: Rifle de Plasma">
+        
+        <!-- TODO: Mostrar errores de validación (Campo requerido o Mínimo 3 caracteres) -->
+          <div class="text-danger text-xs mt-1">
+            Campo requerido o Mínimo 3 caracteres
+          </div>
+        
+      </div>
+
+      <div>
+        <label class="input-label">Tipo de Suministro</label>
+        <select name="type" class="input-field">
+          <option value="" disabled selected>Seleccione categoría...</option>
+          <option value="Weapon">Armamento</option>
+          <option value="Protection">Protección</option>
+          <option value="Utility">Utilidad</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="input-label mb-2 block">Estado del Material</label>
+        <div class="flex gap-4">
+          <label class="flex items-center gap-2 cursor-pointer text-gray-400 hover:text-white">
+            <input type="radio" name="condition" value="New" required>
+            Nuevo
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer text-gray-400 hover:text-white">
+            <input type="radio" name="condition" value="Used" required>
+            Usado
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer text-gray-400 hover:text-white">
+            <input type="radio" name="condition" value="Broken" required>
+            Dañado
+          </label>
+        </div>
+      </div>
+
+      <div>
+        <label class="input-label">Asignado a (Opcional)</label>
+        <!--<select name="assignedTo"  class="input-field">
+          <option [ngValue]="null">-- SIN ASIGNAR --</option>-->
+          <!-- TODO: Cargar dinámicamente desde el backend 
+        </select>-->
+      </div>
+      <!-- TODO: Desahbilitar botón si el formulario no es válido -->
+      <button type="submit" class="btn btn-primary w-full disabled:opacity-50">
+        REGISTRAR EN ARMERÍA
+      </button>
+
+    </form>
+  </div>
+</div>

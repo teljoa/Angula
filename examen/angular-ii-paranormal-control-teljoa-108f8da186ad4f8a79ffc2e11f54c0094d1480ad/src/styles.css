@@ -1,0 +1,132 @@
+/* 1. Importar Tailwind (Obligatorio en v4) */
+@import "tailwindcss";
+
+/* 2. Importar Fuentes (Google Fonts) */
+/* 'Space Mono' para encabezados/datos y 'Inter' para lectura */
+/* SPACE MONO (Títulos / Datos) */
+@font-face {
+  font-family: 'Space Mono';
+  src: url('/fonts/SpaceMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  src: url('/fonts/SpaceMono-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* INTER (Texto / Cuerpo) */
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* 3. Configuración del Tema (Variables de CSS nativas) */
+@theme {
+  /* Paleta de Colores "Bureau" */
+  --color-void: #050505;        /* Fondo principal (casi negro) */
+  --color-surface: #111111;     /* Paneles y tarjetas */
+  --color-surface-hl: #1a1a1a;  /* Hover en superficies */
+  
+  --color-border: #333333;      /* Bordes sutiles */
+  --color-border-hl: #555555;   /* Bordes destacados */
+
+  --color-terminal: #00ff41;    /* Verde fósforo (Acciones/Éxito) */
+  --color-danger: #ff3333;      /* Rojo alerta (Keter/Error) */
+  --color-warning: #ffcc00;     /* Amarillo (Euclid/Advertencia) */
+  --color-safe: #00ccff;        /* Azul (Safe/Info) */
+
+  /* Tipografías */
+  --font-mono: "Space Mono", monospace;
+  --font-sans: "Inter", sans-serif;
+
+  /* Animaciones Custom */
+  --animate-blink: blink 1s step-end infinite;
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+}
+
+/* 4. Estilos Base y Utuiliades Custom */
+@layer base {
+  body {
+    background-color: var(--color-void);
+    color: #e5e5e5;
+    font-family: var(--font-sans);
+    /* Patrón de líneas de escaneo sutil */
+    background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 2px, 3px 100%;
+    min-height: 100vh;
+  }
+
+  /* Encabezados siempre monoespaciados y en mayúsculas */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+  }
+}
+
+@layer components {
+  /* --- BOTONES --- */
+  .btn {
+    @apply px-4 py-2 font-mono font-bold uppercase transition-all duration-200 border cursor-pointer flex items-center justify-center gap-2;
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 95% 100%, 0 100%); /* Corte en la esquina */
+  }
+
+  .btn-primary {
+    @apply bg-terminal text-black border-terminal hover:bg-black hover:text-terminal;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+  }
+
+  .btn-danger {
+    @apply bg-transparent text-danger border-danger hover:bg-danger hover:text-white;
+  }
+
+  .btn-ghost {
+    @apply bg-transparent border-transparent text-gray-400 hover:text-white hover:bg-surface-hl;
+  }
+
+  /* --- INPUTS --- */
+  .input-field {
+    @apply w-full bg-surface border border-border text-white px-3 py-2 font-mono focus:outline-none focus:border-terminal transition-colors placeholder-gray-600;
+  }
+  
+  .input-label {
+    @apply block text-xs font-mono text-gray-400 uppercase mb-1 tracking-widest;
+  }
+
+  /* --- CARDS / PANELES --- */
+  .panel {
+    @apply bg-surface border border-border p-6 relative;
+  }
+  
+  /* Efecto de esquina decorativa en los paneles */
+  .panel::after {
+    content: '';
+    @apply absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-terminal;
+  }
+
+  /* --- BADGES (Niveles de Peligro) --- */
+  .badge {
+    @apply px-2 py-0.5 text-xs font-mono font-bold uppercase border;
+  }
+  
+  .badge-safe { @apply text-safe border-safe bg-safe/10; }
+  .badge-euclid { @apply text-warning border-warning bg-warning/10; }
+  .badge-keter { @apply text-danger border-danger bg-danger/10 animate-pulse; }
+}

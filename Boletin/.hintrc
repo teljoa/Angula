@@ -6,18 +6,10 @@
     "axe/structure": [
       "default",
       {
-        "list": "off",
-        "listitem": "off"
+        "list": "off"
       }
     ],
     "no-inline-styles": "off",
-    "button-type": "off",
-    "typescript-config/is-valid": "off",
-    "axe/forms": [
-      "default",
-      {
-        "label": "off"
-      }
-    ]
+    "button-type": "off"
   }
 }
