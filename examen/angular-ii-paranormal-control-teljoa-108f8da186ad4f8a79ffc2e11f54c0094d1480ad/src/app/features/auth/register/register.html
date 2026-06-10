@@ -5,29 +5,30 @@
     <h2 class="text-2xl text-terminal mb-1 text-center">NUEVO RECLUTA</h2>
     <p class="text-xs text-center text-gray-500 font-mono mb-6 uppercase tracking-widest">Formulario de acceso nivel 1</p>
 
-    <form class="space-y-4">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
       
       <div>
         <label class="input-label">Correo Institucional</label>
-        <input type="email" class="input-field" placeholder="agente@bureau.com">
+        <input type="email" formControlName="email" class="input-field" placeholder="agente@bureau.com">
       </div>
 
       <div>
         <label class="input-label">Clave de Acceso</label>
-        <input type="password" class="input-field" placeholder="••••••">
+        <input type="password" formControlName="password" class="input-field" placeholder="••••••">
       </div>
 
       <div>
         <label class="input-label">Nombre en Clave</label>
         <div class="relative">
-          <input type="text"  class="input-field" placeholder="Ej: Agente K">
-          
-          
+          <input type="text" formControlName="codeName" class="input-field" placeholder="Ej: Agente K">
         </div>
         
         <!-- TODO: Mostrar error si el nombre en clave ya existe -->
-          <span class="text-danger text-xs mt-1 block font-mono">⚠️ ESE NOMBRE EN CLAVE YA ESTÁ ASIGNADO</span>
-        
+          @if(form.get('codeName')?.hasError('codeNameExists')){
+            <span class="text-danger text-xs mt-1 block font-mono">
+              ⚠️ ESE NOMBRE EN CLAVE YA ESTÁ ASIGNADO
+            </span>
+          }
       </div>
 
       <div>
@@ -40,8 +41,7 @@
       </div>
 
       <div class="pt-4 flex flex-col gap-3">
-        <button type="submit"  
-          class="btn btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed">
+        <button type="submit" class="btn btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed" [disabled]="form.invalid">
           REGISTRAR NUEVO AGENTE
         </button>
         

@@ -3,26 +3,22 @@
     
     <h2 class="text-2xl font-mono text-white mb-6">REGISTRO DE EQUIPAMIENTO</h2>
 
-    <form class="space-y-6">
+    <form class="space-y-6" #equipmentForm="ngForm" (ngSubmit)="onSubmit()">
 
       <div>
         <label class="input-label">Nombre del Equipo</label>
-        <input 
-          type="text" 
-          required 
-          class="input-field" 
-          placeholder="Ej: Rifle de Plasma">
-        
+        <input type="text" name="name" required minlength="3" [(ngModel)]="equipment.name" #name="ngModel" class="input-field" placeholder="Ej: Rifle de Plasma">
         <!-- TODO: Mostrar errores de validación (Campo requerido o Mínimo 3 caracteres) -->
-          <div class="text-danger text-xs mt-1">
-            Campo requerido o Mínimo 3 caracteres
-          </div>
-        
+          @if(name.invalid && name.touched){
+            <div class="text-danger text-xs mt-1">
+              Campo requerido o mínimo 3 caracteres
+            </div>
+          }
       </div>
 
       <div>
         <label class="input-label">Tipo de Suministro</label>
-        <select name="type" class="input-field">
+        <select name="type" required [(ngModel)]="equipment.type" #type="ngModel" class="input-field">
           <option value="" disabled selected>Seleccione categoría...</option>
           <option value="Weapon">Armamento</option>
           <option value="Protection">Protección</option>
@@ -34,15 +30,15 @@
         <label class="input-label mb-2 block">Estado del Material</label>
         <div class="flex gap-4">
           <label class="flex items-center gap-2 cursor-pointer text-gray-400 hover:text-white">
-            <input type="radio" name="condition" value="New" required>
+            <input type="radio" name="condition" value="New" required [(ngModel)]="equipment.condition">
             Nuevo
           </label>
           <label class="flex items-center gap-2 cursor-pointer text-gray-400 hover:text-white">
-            <input type="radio" name="condition" value="Used" required>
+            <input type="radio" name="condition" value="Used" required [(ngModel)]="equipment.condition">
             Usado
           </label>
           <label class="flex items-center gap-2 cursor-pointer text-gray-400 hover:text-white">
-            <input type="radio" name="condition" value="Broken" required>
+            <input type="radio" name="condition" value="Broken" required [(ngModel)]="equipment.condition">
             Dañado
           </label>
         </div>
@@ -50,13 +46,16 @@
 
       <div>
         <label class="input-label">Asignado a (Opcional)</label>
-        <!--<select name="assignedTo"  class="input-field">
-          <option [ngValue]="null">-- SIN ASIGNAR --</option>-->
-          <!-- TODO: Cargar dinámicamente desde el backend 
-        </select>-->
+        <select name="assignedTo"  class="input-field">
+          <option [ngValue]="null">-- SIN ASIGNAR --</option>
+          <!-- TODO: Cargar dinámicamente desde el backend -->
+           @for(agent of agents; track agent._id){
+            <option [value]="agent._id"> {{agent.codeName}} </option>
+          }
+        </select>
       </div>
       <!-- TODO: Desahbilitar botón si el formulario no es válido -->
-      <button type="submit" class="btn btn-primary w-full disabled:opacity-50">
+      <button type="submit" class="btn btn-primary w-full disabled:opacity-50"[disabled]="equipmentForm.invalid">
         REGISTRAR EN ARMERÍA
       </button>
 

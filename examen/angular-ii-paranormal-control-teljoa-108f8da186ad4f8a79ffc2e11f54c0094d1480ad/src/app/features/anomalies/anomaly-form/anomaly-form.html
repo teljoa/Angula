@@ -6,7 +6,7 @@
       <div>
         <h2 class="text-2xl font-mono text-white">
           <!-- TODO: Mostrar Editar Expediente o Nuevo Registro según editemo o creemos -->
-         
+           {{ isEditMode? 'EDITAR EXPEDIENTE': 'NUEVO REGISTRO'}}
         </h2>
       </div>
       <div class="text-xs font-mono text-gray-600">
@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <form class="space-y-6">
+    <form class="space-y-6" [formGroup]="form" (ngSubmit)="onSubmit()">
 
       <div>
         <label class="input-label">Identificador (Formato: OBJ-000)</label>

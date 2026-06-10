@@ -8,7 +8,7 @@ export const routes: Routes = [
   // TODO: Cargar rutas de autenticación (login, register) sin protección de guardia
   // La ruta de login se cargará siempre, la de register solo si el usuario navega a ella (lazy loading)
   {path:"login", component:Login},
-  {path:"registre", loadComponent:()=>import('./features/auth/register/register').then(m=>m.Register)},
+  {path:"register", loadComponent:()=>import('./features/auth/register/register').then(m=>m.Register)},
   // El resto de rutas estarán protegidas por el authGuard, que redirigirá a login si no hay usuario autenticado
   // Todas las rutas relacionadas con anomalías se cargarán de forma perezosa (lazy loading) para optimizar la carga inicial de la aplicación
   // Las rutas de dashboard y equipamiento como se quiera:
