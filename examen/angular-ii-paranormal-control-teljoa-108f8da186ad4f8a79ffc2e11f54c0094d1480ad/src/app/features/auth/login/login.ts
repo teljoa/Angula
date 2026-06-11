@@ -30,21 +30,14 @@ export class Login {
 
     const {email, password}=this.form.getRawValue();
 
-    this.authService.login(
-      email!,
-      password!
-    )
-    .subscribe({
+    this.authService.login(email!,password!).subscribe({
       next:(response:any)=>{
         this.router.navigate(['/dashboard']);
       },
       error:()=>{
         this.errorMsg="CREDENCIALES INVÁLIDAS O ACCESO DENEGADO";
-
         this.form.patchValue({password:''})
       }
     })
-    
   }
-
 }

@@ -18,38 +18,42 @@
 
       <div>
         <label class="input-label">Identificador (Formato: OBJ-000)</label>
-        <input type="text" class="input-field" placeholder="OBJ-..." />
+        <input type="text" class="input-field" placeholder="OBJ-..."  formControlName="subject"/>
 
       <!-- TODO: Mostrar cuando se produzca el error  -->
-        <span class="text-danger text-xs mt-1 block">>> FORMATO INVÁLIDO. DEBE SER 'OBJ-NUMEROS'</span>
+      @if(form.get('subject')?.invalid && form.get('subject')?.touched){
+        <span class="text-danger text-xs mt-1 block"> 
+          >> FORMATO INVÁLIDO.DEBE SER OBJ-NUMEROS
+        </span>
+      }  
       
       </div>
 
       <div class="grid grid-cols-2 gap-4 mt-4 p-4 bg-surface-hl border border-dashed border-gray-700">
         <div>
           <label class="input-label">Fecha de Hallazgo</label>
-          <input type="date" class="input-field">
+          <input type="date" class="input-field" formControlName="discoveryDate">
         </div>
 
         <div>
           <label class="input-label">Fecha de Contención</label>
-          <input type="date" class="input-field">
+          <input type="date" class="input-field"  formControlName="containmentDate">
         </div>
 
         
       <!-- TODO: Mostrar cuando se produzca el error (la fecha de contención es anterior a la de hallazgo)  -->
-        
-        <div class="col-span-2 text-danger text-xs text-center font-bold animate-pulse">
-          ⚠️ PARADOJA TEMPORAL DETECTADA: LA CONTENCIÓN NO PUEDE SER ANTERIOR AL HALLAZGO
-        </div>
-        
+        @if(form.hasError('invalidDates')){
+          <div class="col-span-2 text-danger text-xs text-center font-bold">
+            ⚠️ PARADOJA TEMPORAL DETECTADA
+          </div>
+        }
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
         <div>
           <label class="input-label">Clasificación de Riesgo</label>
-          <select class="input-field appearance-none cursor-pointer">
+          <select class="input-field appearance-none cursor-pointer" formControlName="dangerLevel">
             <option value="Safe">SAFE (Seguro)</option>
             <option value="Euclid">EUCLID (Impredecible)</option>
             <option value="Keter">KETER (Peligroso)</option>
@@ -58,7 +62,7 @@
 
         <div>
           <label class="input-label">Estado Actual</label>
-          <select class="input-field appearance-none cursor-pointer">
+          <select class="input-field appearance-none cursor-pointer"  formControlName="status">
             <option value="Contained">Contained (Contenido)</option>
             <option value="Breached">Breached (Fugado)</option>
             <option value="Unknown">Unknown (Desconocido)</option>
@@ -70,17 +74,18 @@
       <div>
         <label class="input-label">Descripción del Fenómeno</label>
         <textarea rows="5" class="input-field resize-none"
-          placeholder="Describa las propiedades anómalas..."></textarea>
+          placeholder="Describa las propiedades anómalas..." formControlName="description"></textarea>
         <div class="text-right text-[0.6rem] text-gray-600 mt-1">
-         
+         {{ form.get('description')?.value?.length || 0 }}/ 10
         </div>
       </div>
 
       <div class="flex items-center gap-4 pt-4 border-t border-border">
         <!-- TODO: Botón de submit deshabilitado si el formulario es inválido (campos requeridos, validaciones, etc.) -->
         <button type="submit"
-          class="btn btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed">
+          class="btn btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed" [disabled]="form.invalid">
           <!-- TODO: Cambiar texto según modo edición (ACTUALIZAR DATOS) o creación (ARCHIVAR) -->
+           {{ isEditMode ? 'ACTUALIZAR DATOS' : 'ARCHIVAR'}}
         </button>
 
         <a routerLink="/anomalies" class="btn btn-ghost">

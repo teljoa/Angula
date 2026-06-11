@@ -1,7 +1,6 @@
 // app.routes.ts
-import { Routes, CanActivateFn } from '@angular/router';
+import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth-guard-guard';
-import { Anomalies } from './features/anomalies/anomaliy-list/anomalies';
 import { Login } from './features/auth/login/login';
 
 export const routes: Routes = [

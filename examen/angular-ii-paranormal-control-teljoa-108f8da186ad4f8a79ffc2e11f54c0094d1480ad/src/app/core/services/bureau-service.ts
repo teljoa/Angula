@@ -37,7 +37,7 @@ export class BureauService {
 
   // TODO: Implementar updateAnomaly(id, anomaly) para actualizar los detalles de una anomalía existente. El parámetro "id" es el identificador de la anomalía a actualizar, y "anomaly" es un objeto con los campos que se desean modificar (name, description, location, severity, etc.)
   updateAnomaly(id: string, anomaly: any){
-    return this.http.post<ApiResponse<Anomaly>>(`${this.apiUrl}/anomalies/${id}`, anomaly)
+    return this.http.put<ApiResponse<Anomaly>>(`${this.apiUrl}/anomalies/${id}`, anomaly)
       .pipe(map(response=>response.data));
   }
 
