@@ -1,0 +1,47 @@
+<div class="view-separator">VISTA 4: EDITAR / NUEVO CURSO</div>
+
+        <section class="view-section">
+            <div class="card form-card">
+                <div class="card-header">
+                    <h2 *ngIf="modo==='edit'">Editar Curso</h2> 
+                <h2 *ngIf="modo==='add'">Añadir Curso</h2></div>
+                <div class="card-body">
+                    <form  [formGroup]="myForm"  (submit)="guardar()">
+                        <div class="form-group">
+                            <label for="curso-nombre">Nombre del Curso</label>
+                            <input type="text" id="curso-nombre" class="form-control" value="Inglés B2" name="nombre" formControlName="nombre">
+                            <small *ngIf="myForm.controls['nombre']?.invalid && myForm.controls['nombre']?.touched" class="text-muted">El nombre es obligatorio.</small>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fecha">Fecha de Inicio</label>
+                                <input type="date" id="fecha" class="form-control" value="2024-10-15" name="fechaInicio" formControlName="fechaInicio">
+                                <small *ngIf="myForm.controls['fechaInicio']?.invalid && myForm.controls['fechaInicio']?.touched" class="error-text">La fecha debe ser posterior a hoy.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="costo">Costo (€)</label>
+                                <input type="number" id="costo" class="form-control" name="costo" formControlName="costo">
+                                <small *ngIf="myForm.controls['costo']?.invalid && myForm.controls['costo']?.touched" 
+                                class="error-text">Debe ser positivo.</small>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="alumno-select">Alumno Asignado</label>
+                            <select id="alumno-select" class="form-control" name="alumnoId" formControlName="alumnoId">
+                                <option value="" disabled>Selecciona a un alumno</option>
+                                <option  [value]="[alum.id]" *ngFor="let alum of alumnos">{{alum.nombre}}</option>
+                            </select>
+                            <small *ngIf="modo==='edit'" class="text-muted">No se puede cambiar el alumno de un curso ya creado.</small>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-outline" routerLink="/cursos">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>

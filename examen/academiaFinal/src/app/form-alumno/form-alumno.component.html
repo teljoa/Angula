@@ -1,0 +1,41 @@
+<div class="view-separator">VISTA 2: FORMULARIO ALTA ALUMNO</div>
+
+        <section class="view-section">
+            <div class="card form-card">
+                <div class="card-header">
+                    <h2>Matricular Nuevo Alumno</h2>
+                </div>
+                <div class="card-body">
+                    <form #myForm="ngForm" (submit)="guardar(myForm)">
+                        <div class="form-group">
+                            <label for="nombre">Nombre Completo</label>
+                            <input type="text" id="nombre" class="form-control" placeholder="Ej: Ana López" name="nombre" [(ngModel)]="newAlumno.nombre" minlength="5" required>
+                            <small class="text-muted" *ngIf="myForm.controls['nombre']?.invalid && myForm.controls['nombre']?.touched">Mínimo 5 caracteres.</small>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="dni">DNI / NIE</label>
+                                <input type="text" id="dni" class="form-control" placeholder="12345678Z" name="dni" [(ngModel)]="newAlumno.dni" pattern="^\d{8}[A-Za-z]$" required>
+                                <small class="text-muted" *ngIf="myForm.controls['dni']?.invalid && myForm.controls['dni']?.touched">Debe ser formato dni.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="edad">Edad</label>
+                                <input type="number" id="edad" class="form-control" placeholder="18" name="edad" [(ngModel)]="newAlumno.edad" min="17" required>
+                                <small class="text-muted" *ngIf="myForm.controls['edad']?.invalid && myForm.controls['edad']?.touched">Minimo 17.</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico</label>
+                            <input type="email" id="email" class="form-control" placeholder="ana@email.com" name="email" [(ngModel)]="newAlumno.email" required>
+                            <small class="text-muted" *ngIf="myForm.controls['email']?.invalid && myForm.controls['email']?.touched">Es obligatorio.</small>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid">Matricular (Inválido)</button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </section>

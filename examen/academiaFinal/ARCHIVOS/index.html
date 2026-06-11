@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Académico - Maquetación</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="navbar-brand">
+            <span class="logo-icon">🎓</span>
+            <h1>Academia Online</h1>
+        </div>
+        
+        <nav class="navbar-menu">
+            <a href="#" class="nav-link active">Matricular Alumno</a>
+            <a href="#" class="nav-link">Gestionar Cursos</a>
+        </nav>
+
+        <div class="navbar-user">
+            <div class="user-info">
+                <span class="label">Profesor:</span>
+                <span class="name">Laura García</span>
+            </div>
+            <button class="btn btn-outline-light btn-sm">Cambiar</button>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <div class="view-separator">VISTA 1: HOME / SELECCIÓN DE PROFESOR</div>
+
+        <section class="view-section">
+            <h2 class="section-title">Selecciona quién eres</h2>
+            <p class="section-subtitle">Elige un perfil para comenzar a gestionar tus alumnos.</p>
+
+            <div class="card-grid">
+                <article class="card card-hover">
+                    <div class="card-avatar">LG</div>
+                    <div class="card-body">
+                        <h3>Laura García</h3>
+                        <p>Departamento de Ciencias</p>
+                        <button class="btn btn-primary btn-full">Acceder</button>
+                    </div>
+                </article>
+
+                <article class="card card-hover">
+                    <div class="card-avatar secondary">JP</div>
+                    <div class="card-body">
+                        <h3>Juan Pérez</h3>
+                        <p>Departamento de Artes</p>
+                        <button class="btn btn-primary btn-full">Acceder</button>
+                    </div>
+                </article>
+
+                <article class="card card-hover">
+                    <div class="card-avatar accent">MR</div>
+                    <div class="card-body">
+                        <h3>Marta Ruiz</h3>
+                        <p>Departamento de Idiomas</p>
+                        <button class="btn btn-primary btn-full">Acceder</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+
+        <div class="view-separator">VISTA 2: FORMULARIO ALTA ALUMNO</div>
+
+        <section class="view-section">
+            <div class="card form-card">
+                <div class="card-header">
+                    <h2>Matricular Nuevo Alumno</h2>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="nombre">Nombre Completo</label>
+                            <input type="text" id="nombre" class="form-control" placeholder="Ej: Ana López">
+                            <small class="text-muted">Mínimo 5 caracteres.</small>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="dni">DNI / NIE</label>
+                                <input type="text" id="dni" class="form-control" placeholder="12345678Z">
+                            </div>
+                            <div class="form-group">
+                                <label for="edad">Edad</label>
+                                <input type="number" id="edad" class="form-control" placeholder="18">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico</label>
+                            <input type="email" id="email" class="form-control" placeholder="ana@email.com">
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-primary" disabled>Matricular (Inválido)</button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+
+        <div class="view-separator">VISTA 3: LISTADO DE CURSOS</div>
+
+        <section class="view-section">
+            <div class="section-header">
+                <h2>Mis Cursos Activos</h2>
+                <button class="btn btn-primary">
+                    <span class="icon">+</span> Nuevo Curso
+                </button>
+            </div>
+
+            <div class="table-responsive card">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Curso</th>
+                            <th>Alumno</th>
+                            <th>Fecha Inicio</th>
+                            <th>Costo</th>
+                            <th class="text-right">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Inglés B2</strong></td>
+                            <td>Carlos Ruiz</td>
+                            <td>15/10/2024</td>
+                            <td><span class="badge badge-success">300€</span></td>
+                            <td class="text-right">
+                                <button class="btn btn-sm btn-outline">Editar</button>
+                                <button class="btn btn-sm btn-danger">Cancelar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Matemáticas Avanzadas</strong></td>
+                            <td>Lucía Méndez</td>
+                            <td>01/11/2024</td>
+                            <td><span class="badge badge-success">150€</span></td>
+                            <td class="text-right">
+                                <button class="btn btn-sm btn-outline">Editar</button>
+                                <button class="btn btn-sm btn-danger">Cancelar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Historia del Arte</strong></td>
+                            <td>Pedro Almodóvar</td>
+                            <td>20/12/2024</td>
+                            <td><span class="badge badge-success">200€</span></td>
+                            <td class="text-right">
+                                <button class="btn btn-sm btn-outline">Editar</button>
+                                <button class="btn btn-sm btn-danger">Cancelar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+
+        <div class="view-separator">VISTA 4: EDITAR / NUEVO CURSO</div>
+
+        <section class="view-section">
+            <div class="card form-card">
+                <div class="card-header">
+                    <h2>Editar Curso</h2> </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="curso-nombre">Nombre del Curso</label>
+                            <input type="text" id="curso-nombre" class="form-control" value="Inglés B2">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fecha">Fecha de Inicio</label>
+                                <input type="date" id="fecha" class="form-control" value="2024-10-15">
+                                <small class="error-text">La fecha debe ser posterior a hoy.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="costo">Costo (€)</label>
+                                <input type="number" id="costo" class="form-control" value="300">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="alumno-select">Alumno Asignado</label>
+                            <select id="alumno-select" class="form-control disabled-input" disabled>
+                                <option value="1" selected>Carlos Ruiz</option>
+                                <option value="2">Lucía Méndez</option>
+                            </select>
+                            <small class="text-muted">No se puede cambiar el alumno de un curso ya creado.</small>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-outline">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+        <main class="container">
+        <div class="view-separator">VISTA 1: HOME / SELECCIÓN DE PROFESOR</div>
+
+        <section class="view-section">
+            <h2 class="section-title">Selecciona quién eres</h2>
+            <p class="section-subtitle">Elige un perfil para comenzar a gestionar tus alumnos.</p>
+            
+            @for (prof of profesorService.profesores| async; track prof.id) {
+
+            <div class="card-grid">
+                <article class="card card-hover">
+                    <div class="card-avatar">{{prof.iniciales}}</div>
+                    <div class="card-body">
+                        <h3>{{prof.nombre}}</h3>
+                        <p>{{prof.departamento}}</p>
+                        <button class="btn btn-primary btn-full" (click)="elegirProfesor(prof)">Acceder</button>
+                    </div>
+                </article>
+            </div>
+        }
+        </section>
+</main>

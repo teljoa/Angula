@@ -1,0 +1,38 @@
+ <div class="view-separator">VISTA 3: LISTADO DE CURSOS</div>
+
+        <section class="view-section">
+            <div class="section-header">
+                <h2>Mis Cursos Activos</h2>
+                <button class="btn btn-primary">
+                    <button class="btn btn-sm btn-primary" routerLink="/cursos/nuevo">+ Nuevo Curso</button>
+                </button>
+            </div>
+
+            <div class="table-responsive card">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Curso</th>
+                            <th>Alumno</th>
+                            <th>Fecha Inicio</th>
+                            <th>Costo</th>
+                            <th class="text-right">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (curso of cursoService.cursos| async; track curso.id) {
+                        <tr>
+                            <td><strong>I{{curso.nombre}}</strong></td>
+                            <td>{{nombreAlumno(curso.alumnoId)}}</td>
+                            <td>{{curso.fechaInicio}}</td>
+                            <td><span class="badge badge-success">{{curso.costo}}</span></td>
+                            <td class="text-right">
+                                <button class="btn btn-sm btn-outline" [routerLink]="['/cursos/editar/',curso.id]">Editar</button>
+                                <button class="btn btn-sm btn-danger" (click)="borrarCurso(curso)">Cancelar</button>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </section>
