@@ -8,6 +8,7 @@ export const routes: Routes = [
 
     {path:'',component:HomeComponent},
     {path:'alumnos/nuevo',component:FormAlumnoComponent,canActivate:[profesorGuard]},
-    {path:'cursos',loadChildren:()=>import('./cursos/curso.routes').then(m=>m.routes),canActivate:[profesorGuard]}
+    {path:'cursos',loadChildren:()=>import('./cursos/curso.routes').then(m=>m.routes),canActivate:[profesorGuard]},
+    {path:'cursos/nuevo', canActivate:[profesorGuard], loadComponent:()=>import('./cursos/form-cursos/form-cursos.component').then(m=>m.FormCursosComponent)}
 
 ];
